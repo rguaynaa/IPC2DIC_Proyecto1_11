@@ -1,12 +1,10 @@
 from Lector import Lector
 
-
-
 def menu_principal():
     lector = Lector()
     ruta = ''
     while True:
-        print('--------- MENU PRINCIPAL ---------')
+        print('\n--------- MENU PRINCIPAL ---------')
         print('- 1. Carga Archivo XML -')
         print('- 2. Gestion de Centros de Datos -')
         print('- 3. Gestión de Máquinas Virtuales  -')
@@ -17,7 +15,7 @@ def menu_principal():
         opcion = int(input('Seleccione una opción: '))
         match opcion:
             case 1:
-                ruta = cargar_xml('archivo_entrada')
+                ruta = cargar_xml('entrada')
                 if ruta == '':
                     print('Error: No se seleccionó un archivo')
                 else:
@@ -42,7 +40,7 @@ def menu_principal():
 
 
 def cargar_xml(tipo):
-    nombre_archivo = input(f"Ingrese el nombre del archvo XML de {tipo} (ejemplo: {tipo}.xml)").strip()
+    nombre_archivo = input(f'Ingrese el nombre del archvo "{tipo}.xml": ').strip()
     if nombre_archivo == '':
         return ''
     ruta_archivo = f'{nombre_archivo}'
