@@ -33,7 +33,7 @@ class MaquinaVirtual:
         return porcentaje_disponible - usado #Devuelve el porcentaje disponible
 
 
-    def  recursos_ram_disponible(self):
+    def recursos_ram_disponible(self):
         usado = 0
         actual = self.contenedores.primero
 
