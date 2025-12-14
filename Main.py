@@ -1,5 +1,5 @@
 from controller.ControladorMenu import ControladorMenu
-from Lector import Lector
+from carpeta_xml.Lector import Lector
 
 
 class Main:
