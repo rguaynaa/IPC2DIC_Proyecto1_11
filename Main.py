@@ -7,6 +7,9 @@ from controller.ControladorCentros import ControladorCentros
 class Main:
     def __init__(self):
         self.funciones = Funciones()
+        self.controladorMenu = ControladorMenu()
+        self.controladorCentro = ControladorCentros()
+        self.controladorVM = ControladorVM()
 
     def Menuprincipal(self):
 
@@ -88,7 +91,7 @@ class Funciones:
                 self.controladorCentro.lista_centros.buscar_dato_por_id(id_buscado,'id')
             elif opcion=="3":
                 print("Mostrando Centro con mayor recursos...")
-                # LOGICA O METODO A LLAMAR
+                self.controladorCentro.ver_centro_mayor_recursos()
             elif opcion=="4":
                 print("Volviendo al Menú Principal...")
                 break
@@ -113,10 +116,12 @@ class Funciones:
             if opcion=="1":
                 print("Buscando VM por ID...")
                 self.controladorVM.mostrar_vm()
-                # LOGICA O METODO A LLAMAR
+                self.controladorVM.mostrar_vm_por_id(id_vm=input("Ingrese el ID de la VM a buscar: "))
+                self.controladorVM.mostrar_vm()
             elif opcion=="2":
                 print("Listando Todas Las VMs de un Centro de Datos...")
-                # LOGICA O METODO A LLAMAR
+                self.controladorVM.listar_vms_de_centro(self.controladorCentro, id_centro=input("Ingrese el ID del Centro de Datos: "))
+                self.controladorVM.mostrar_vm()
             elif opcion=="3":
                 print("Migrando VM entre Centros de Datos...")
                 # LOGICA O METODO A LLAMAR
@@ -173,13 +178,13 @@ class Funciones:
             opcion = input("Seleccione una opción: ")
             if opcion=="1":
                 print("Agregando Solicitud...")
-                # LOGICA O METODO A LLAMAR
+                self.controladorMenu.agregar_solicitud()
             elif opcion=="2":
                 print("Procesando Solicitud de Mayor Prioridad...")
-                # LOGICA O METODO A LLAMAR
+                self.controladorMenu.procesar_siguiente()
             elif opcion=="3":
                 print("Procesando las Solicitudes...")
-                # LOGICA O METODO A LLAMAR
+                self
             elif opcion=="4":
                 print("Viendo Cola de Solicitudes...")
                 # LOGICA O METODO A LLAMAR

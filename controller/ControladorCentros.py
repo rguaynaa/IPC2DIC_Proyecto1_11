@@ -9,7 +9,11 @@ class ControladorCentros:
         self.lista_centros.agregar_dato(centro)
 
     def mostrar_centros_datos(self):
+        print("\n" +"="*30)
+        print("|   Lista de Centros de Datos   |")
+        print("="*30)
         self.lista_centros.mostrar_informacion()
+
 
     def agregar_vm(self, vm, id_centro):
         centro = self.lista_centros.buscar_dato_por_id(id_centro, 'id')
@@ -19,7 +23,37 @@ class ControladorCentros:
         centro.vm.agregar_dato(vm)
         return True
 
+    def ver_centro_mayor_recursos(self):
+            print("\n" +"="*40)
+            print("| Centro de Datos con Mayor Recursos |")
+            print("="*40)
+    
+            if self.lista_centros.esta_vacia():
+                print("No hay centros de datos registrados")
+                return None
+    
+            maximo_recursos = -1
+            centro_mayor = None
 
+            actual = self.lista_centros.primero    
+            while actual is not None:
+                centro = actual.dato
+
+                recursos_totales = (centro.cpu_nucleos_total + 
+                                centro.ram_total_GB + 
+                                centro.almacenamiento_total_GB)
+                #recursos_mayor = centro_mayor.cpu + centro_mayor.ram + centro_mayor.almacenamiento
+    
+                if recursos_totales > maximo_recursos:
+                    centro_mayor = centro
+                    maximo_recursos = recursos_totales
+    
+                actual = actual.siguiente
+            if centro_mayor:
+                print("Centro de Datos con mayor recursos:")
+                centro_mayor.mostrar_datos()
+            else:
+                print("No se encontraron centros de datos") 
 
     
 

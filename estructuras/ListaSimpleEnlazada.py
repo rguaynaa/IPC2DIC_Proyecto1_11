@@ -43,12 +43,10 @@ class ListaSimpleEnlazada:
         while actual is not None:
             if hasattr(actual.dato, atributo_id):
                 if getattr(actual.dato, atributo_id) == id_buscado:
-                    return actual.dato
-                else:
-                    return print(f"El centro {id_buscado}, no fue encontrado.")
-            else:
-                print("Dato no encontrado")
+                    return actual.dato.mostrar_datos()
+                 
             actual = actual.siguiente
+        print(f"El elemento {id_buscado}, no fue encontrado.")
         return None
 
 
