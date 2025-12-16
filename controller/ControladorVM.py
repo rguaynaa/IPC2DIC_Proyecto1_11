@@ -23,18 +23,22 @@ class ControladorVM:
         else:
             print(f"Error: La VM {id_vm} no existe en el sistema o esta mal redactada.")
 
-    def listar_vms_de_centro(self, controlador_centros, id_centro):
 
+    def listar_vms_de_centro(self, controlador_centros, id_centro):
         centro = controlador_centros.lista_centros.buscar_dato_por_id(id_centro, 'id')
         if centro:
+<<<<<<< Updated upstream
             print(f"\n VMS EN {centro.nombre}")
 
+=======
+            print(f"\n--- LISTADO DE VMS EN {centro.nombre} ---")
+>>>>>>> Stashed changes
             centro.vm.mostrar_informacion()
         else:
             print(f"Error: El centro {id_centro} no existe.")
 
+
     def migrar_vm(self, controlador_centros, id_vm, id_centro_destino):
-        
         vm = self.buscar_vm_id(id_vm)# buscammos la vm globalmente(entre todos los centros)
         if not vm:
             print(f"Error: VM {id_vm} no encontrada.")

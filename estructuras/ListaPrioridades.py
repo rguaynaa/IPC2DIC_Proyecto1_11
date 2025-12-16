@@ -8,10 +8,11 @@ class ListaCola:
     def esta_vacia(self):
         return self.primero is None
 
+
     def insertar_dato(self,dato,prioridad):
         nuevo_nodo = NodoCola(dato,prioridad)
 
-        if self.esta_vacia or prioridad > self.primero.prioridad:
+        if self.esta_vacia() or prioridad > self.primero.prioridad:
             nuevo_nodo.siguiente = self.primero
             self.primero = nuevo_nodo
         else:

@@ -1,18 +1,18 @@
 from modelos.Contenedor import Contenedor
-from modelos.Solicitud import Solicitud
 from modelos.Instrucciones import CrearVM, MigrarVM, Procesar
 import xml.etree.ElementTree as ET
 from modelos.CentroDatos import CentroDatos
 from modelos.MaquinaVirtual import MaquinaVirtual
 from controller.ControladorVM import ControladorVM
 from controller.ControladorCentros import ControladorCentros
+from controller.ControladorSolicitudes import ControladorSolicitudes
 
 
 class Lector:
-    def __init__(self, controladorVM=None, controladorCentros=None):
+    def __init__(self, controladorVM=None, controladorCentros=None, controladorSolicitudes = None):
         self.controladorVM = controladorVM if controladorVM is not None else ControladorVM()
         self.controladorCentros = controladorCentros if controladorCentros is not None else ControladorCentros()
-        self.list_solicitud = []
+        self.controladorSolicitudes = controladorSolicitudes if controladorSolicitudes is not None else ControladorSolicitudes()
         self.list_crearVM = []
         self.list_migrarVM = []
         self.list_procesar = []
@@ -56,7 +56,7 @@ class Lector:
             self.controladorCentros.crear_centro(nuevo_centro)
             
 
-            print(f"Centro {id_centro} cargado exitosamente.")
+            print(f"Centro {id_centro} cargado.")
 
     def cargar_maquinas_virtuales(self,root):
         maquinas_xml = root.find('.//maquinasVirtuales')
@@ -81,7 +81,7 @@ class Lector:
 
             agregado = self.controladorCentros.agregar_vm(nuevo_vm, id_centro)
             if agregado:
-                print(f"MaquinaVirtual {id_mv} cargado exitosamente.")
+                print(f" MaquinaVirtual {id_mv} cargado.")
 
 
             if self.controladorVM.lista_vm is None:
@@ -102,7 +102,7 @@ class Lector:
 
                     nuevo_vm.contenedores.agregar_dato(nuevo_cont)
 
-                    print(f"Contenedor {id_cont} cargado exitosamente.")
+                    print(f"  Contenedor {id_cont} cargado.")
 
 
 
@@ -125,13 +125,7 @@ class Lector:
 
             tiempo = int(sol.find('tiempoEstimado').text)
 
-            nueva_solicitud = Solicitud(id_sol,cliente,tipo,prioridad,cpu,ram,almacenamiento,tiempo)
-
-            self.list_solicitud.append(nueva_solicitud)
-            print(f"Solicitud {id_sol} cargado exitosamente.")
-        
-        for sol in self.list_solicitud:
-            sol.mostrar_datos()
+            self.controladorSolicitudes.agregar_solicitud(id_sol,cliente,tipo,prioridad,cpu,ram,almacenamiento,tiempo)
 
 
     def cargar_instrucciones(self, root):

@@ -1,5 +1,4 @@
 from estructuras.ListaSimpleEnlazada import ListaSimpleEnlazada
-from controller.ControladorVM import ControladorVM
 
 class ControladorCentros: 
     def __init__(self):

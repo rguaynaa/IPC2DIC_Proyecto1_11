@@ -3,13 +3,13 @@ from modelos.Solicitud import Solicitud
 
 class ControladorSolicitudes:
     def __init__(self):
-
         self.cola_solicitudes = ListaCola()
 
     def agregar_solicitud(self, id, cliente, tipo, prioridad, cpu, ram, alm, tiempo):
         nueva_sol = Solicitud(id, cliente, tipo, prioridad, cpu, ram, alm, tiempo)
         self.cola_solicitudes.insertar_dato(nueva_sol, prioridad)
         print(f"Solicitud {id} agregada con prioridad {prioridad}.")
+
 
     def ver_cola(self):
         print("\n--- COLA DE SOLICITUDES (Por Prioridad) ---")
@@ -21,7 +21,7 @@ class ControladorSolicitudes:
         pos = 1
         while actual:
             sol = actual.dato
-            print(f"{pos}. [{sol.prioridad}] {sol.cliente} - {sol.tipo} (ID: {sol.id})")
+            print(pos,f". Solicitud: {sol.id} - {sol.cliente} - ({sol.tipo}) - Prioridad: {sol.prioridad} \nEstado: {sol.estado} \n Recursos:")
             actual = actual.siguiente
             pos += 1
 

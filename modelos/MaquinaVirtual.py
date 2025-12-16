@@ -10,7 +10,7 @@ class MaquinaVirtual:
         self.almacenamiento_GB = almacenamiento_GB
         self.ip = ip
         self.contenedores = ListaSimpleEnlazada()
-        self.estado = "Activo"
+        self.estado = "Activa"
     
 
     def mostrar_datos(self):
