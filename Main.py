@@ -5,6 +5,7 @@ from carpeta_xml.Lector import Lector
 from controller.ControladorVM import ControladorVM
 from controller.ControladorCentros import ControladorCentros
 from controller.ControladorSolicitudes import ControladorSolicitudes
+from controller.ControladorInstrucciones import ControladroInstrucciones
 
 
 class Main:
@@ -62,10 +63,10 @@ class Funciones:
         self.controladorCentro = ControladorCentros()
         self.controladorVM = ControladorVM()
         self.ControladorContenedores = ControladorContenedores(self.controladorVM)
-        self.controladorSolicitudes = ControladorSolicitudes() 
-        self.lector = Lector(controladorVM=self.controladorVM,controladorCentros=self.controladorCentro,controladorSolicitudes=self.controladorSolicitudes)
-
-
+        self.controladorSolicitudes = ControladorSolicitudes()
+        self.controllerInstruccion = ControladroInstrucciones() 
+        self.lector = Lector(controladorVM=self.controladorVM,controladorCentros=self.controladorCentro,
+                             controladorSolicitudes=self.controladorSolicitudes,controllerInstruccion=self.controllerInstruccion)
 
     def cargarArchivoXML(self):
         print("\n" +"="*20)
@@ -239,6 +240,8 @@ class Funciones:
                 self.controladorSolicitudes.procesar_solicitud(self.controladorCentro)
             elif opcion=="3":
                 print("Procesando las Solicitudes...")
+                cantidad = input("Cantidad que desea ejecutar: ")
+                self.controladorSolicitudes.procesar_varias_solicitudes(self.controladorCentro,cantidad)
             elif opcion=="4":
                 print("Viendo Cola de Solicitudes...")
                 self.controladorSolicitudes.ver_cola()

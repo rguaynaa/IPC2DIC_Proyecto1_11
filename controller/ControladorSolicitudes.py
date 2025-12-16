@@ -46,6 +46,29 @@ class ControladorSolicitudes:
         self.cola_solicitudes.extraer_urgente()
         print("Solicitud procesada ",solicitud.id)
 
+    
+    def procesar_varias_solicitudes(self, controladorCentro,cantidad):
+        if self.cola_solicitudes.primero is None:
+            print("No existe solicitudes pendientes.")
+            return
+        
+        for i in range(cantidad):
+
+            solicitud = self.cola_solicitudes.primero.dato
+
+            centroDisponible = self.centro_mayor_recurso_disponible(controladorCentro, solicitud)
+
+            if centroDisponible is None:
+                print("No existe centro con recursos suficientes para la solicitud.")
+                return
+
+            mv_nueva = MaquinaVirtual(solicitud.id, centroDisponible.id, " ", solicitud.cpu, solicitud.ram_GB, solicitud.almacenamiento_GB, "")
+            centroDisponible.vm.agregar_dato(mv_nueva)
+
+            self.cola_solicitudes.extraer_urgente()
+            print("Solicitud procesada ",solicitud.id)
+
+
 
     def centro_mayor_recurso_disponible(self, controladorCentro, solicitud=None):
 
