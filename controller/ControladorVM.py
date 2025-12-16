@@ -1,5 +1,6 @@
 from estructuras.ListaSimpleEnlazada import ListaSimpleEnlazada
 
+
 class ControladorVM: 
     def __init__(self):
         self.lista_vm = ListaSimpleEnlazada()
@@ -26,7 +27,7 @@ class ControladorVM:
 
         centro = controlador_centros.lista_centros.buscar_dato_por_id(id_centro, 'id')
         if centro:
-            print(f"\n--- LISTADO DE VMS EN {centro.nombre} ---")
+            print(f"\n VMS EN {centro.nombre}")
 
             centro.vm.mostrar_informacion()
         else:
@@ -46,9 +47,17 @@ class ControladorVM:
             print("Error: Centro de origen o destino no válidos o no existen.")
             return
         
-        #validar recursos en el centro destino
+        if (centro_destino.cpu_disponible() >= vm.cpu_nucleos and
+            centro_destino.ram_disponible() >= vm.ram_GB and
+            centro_destino.almacenamiento_disponible() >= vm.almacenamiento_GB):
+            
+                if centro_origen.vm.eliminar_dato_por_id(id_vm, 'id'):
 
-        #falta eliminar la vm del centro origen
-    
+                    vm.id_centro = id_centro_destino
 
-
+                    centro_destino.vm.agregar_dato(vm)
+                    print(f"La VM {id_vm} migrada a {id_centro_destino}.")
+                else:
+                    print("Error al eliminar la VM del centro de origen.")
+        else:
+                print(f"Error: El centro {id_centro_destino} no tiene recursos suficientes para ser migrada")
