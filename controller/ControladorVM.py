@@ -28,6 +28,7 @@ class ControladorVM:
         centro = controlador_centros.lista_centros.buscar_dato_por_id(id_centro, 'id')
         if centro:
             print(f"\n VMS EN {centro.nombre}")
+            centro.vm.mostrar_informacion() 
 
         else:
             print(f"Error: El centro {id_centro} no existe.")
