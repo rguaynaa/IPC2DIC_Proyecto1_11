@@ -56,22 +56,13 @@ class Main:
 #......................FUNCIONES DEL MENU..........................
 class Funciones:
     def __init__(self):
+
         self.controladorMenu = ControladorMenu()
         self.controladorCentro = ControladorCentros()
         self.controladorVM = ControladorVM()
-
         self.controladorContenedores = ControladorContenedores(self.controladorVM)
-        self.controladorSolicitudes =ControladorSolicitudes() 
-        
+        self.controladorSolicitudes = ControladorSolicitudes() 
         self.lector = Lector(controladorVM=self.controladorVM,controladorCentros=self.controladorCentro)
-
-    def __init__(self):
-        self.controladorMenu = ControladorMenu()
-        self.controladorVM = ControladorVM()
-        self.controladorCentro = ControladorCentros()
-        self.lector = Lector(controladorVM=self.controladorVM, controladorCentros=self.controladorCentro)
-
-
     def cargarArchivoXML(self):
         print("\n" +"="*20)
         print("|Cargar Archivo XML|")
