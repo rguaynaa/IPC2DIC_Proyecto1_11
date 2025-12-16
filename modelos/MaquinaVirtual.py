@@ -34,7 +34,7 @@ class MaquinaVirtual:
 
 
     def recursos_ram_disponible(self):
-        usado = 0
+        usado_en_MB = 0
         actual = self.contenedores.primero
 
         # 1 GB son 1024 MG (MV está en GB y contenedor en MG)

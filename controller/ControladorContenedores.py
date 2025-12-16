@@ -4,25 +4,25 @@ class ControladorContenedores:
     def __init__(self,controlador_vm):
         self.controlador_vms = controlador_vm
     
-    def desplegar_contenedores(self,id_vm,id_contenedor,nombre,cpu,ram,puerto):
+    def desplegar_contenedores(self,id_vm,id_contenedor,nombre,imagen,cpu,ram,puerto):
 
         vm = self.controlador_vms.buscar_vm_id(id_vm)
 
         if vm:
-            disponible_cpu = vm.recursos_cpu_disponibles()
-            disponible_ram = vm.recursos_ram_disponibles()
+            disponible_cpu = vm.recursos_cpu_disponible()
+            disponible_ram = vm.recursos_ram_disponible()
 
 
             if disponible_cpu >= int(cpu) and disponible_ram >= int(ram):
                 from modelos.Contenedor import Contenedor
-                nuevo_contenedor = Contenedor(id_contenedor,nombre,int(cpu),int(ram),puerto)
+                nuevo_contenedor = Contenedor(id_contenedor,nombre,imagen,int(cpu),int(ram),puerto)
                 vm.contenedores.agregar_dato(nuevo_contenedor)
                 print(f"Contenedor {nombre} desplegado en VM {id_vm}.")
             else:
                 print(f"Error: Recursos insuficientes en VM {id_vm} para desplegar el contenedor {nombre}.")
 
     def listar_contenedores_vm(self,id_vm):
-        vm = self.ctrl_vms.buscar_vm_por_id(id_vm)
+        vm = self.controlador_vms.buscar_vm_id(id_vm)
         if vm:
             print("="*40)
             print(f"Contenedores en VM {id_vm}:")
