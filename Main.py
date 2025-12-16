@@ -1,4 +1,4 @@
-from controller import ControladorContenedores
+from controller.ControladorContenedores import ControladorContenedores
 from controller.ControladorSolicitudes import ControladorSolicitudes
 from controller.ControladorMenu import ControladorMenu
 from carpeta_xml.Lector import Lector
@@ -60,14 +60,14 @@ class Funciones:
         self.controladorMenu = ControladorMenu()
         self.controladorCentro = ControladorCentros()
         self.controladorVM = ControladorVM()
-        self.controladorContenedores = ControladorContenedores(self.controladorVM)
+        self.ControladorContenedores = ControladorContenedores(self.controladorVM)
         self.controladorSolicitudes = ControladorSolicitudes() 
         self.lector = Lector(controladorVM=self.controladorVM,controladorCentros=self.controladorCentro)
     def cargarArchivoXML(self):
         print("\n" +"="*20)
         print("|Cargar Archivo XML|")
         print("="*20)
-        ruta = self.controladorMenu.cargar_xml('carpeta_xml\entrada')
+        ruta = self.controladorMenu.cargar_xml('carpeta_xml/entrada')
         self.lector.cargar_archivo_xml(ruta)
     
 
@@ -87,7 +87,6 @@ class Funciones:
             if opcion=="1":
                 self.controladorCentro.mostrar_centros_datos()
             elif opcion=="2":
-
                 id_buscado = input("Ingrese el ID: ")
                 centro_encontrado = self.controladorCentro.lista_centros.buscar_dato_por_id(id_buscado,'id')
                 if centro_encontrado:
@@ -120,7 +119,9 @@ class Funciones:
 
             if opcion=="1":
                 print("Buscando VM por ID...")
-                self.controladorVM.mostrar_vm_por_id(id_vm=input("Ingrese el ID de la VM a buscar: "))
+                id_vm=input("Ingrese el ID de la VM a buscar: ")
+                self.controladorVM.mostrar_vm_por_id(id_vm)
+
             elif opcion=="2":
                 print("="*40)
                 id_centro = input("Ingrese el ID del Centro de Datos: ")
@@ -166,22 +167,33 @@ class Funciones:
                 cpu = input("CPU (%): ")
                 ram = input("RAM (MB): ")
                 puerto = input("Puerto: ")
-                self.controladorContenedores.desplegar_contenedores(id_vm, id_cont, nombre, cpu, ram, puerto)
+                self.ControladorContenedores.desplegar_contenedores(id_vm, id_cont, nombre,imagen, cpu, ram, puerto)
 
             elif opcion=="2":
                 print("="*40)
                 id_vm = input("Ingrese ID de la VM: ")
 
-                self.controladorContenedores.listar_contenedores_vm(id_vm)
+                self.ControladorContenedores.listar_contenedores_vm(id_vm)
 
             elif opcion=="3":
                 print("Cambiando Estado de un contenedor...")
-                # LOGICA O METODO A LLAMAR (falta de implementación)
+                print("Cambiando Estado de un contenedor...")
+                id_vm = input("Ingrese ID de la VM: ")
+                id_cont = input("Ingrese ID del Contenedor: ")
+                print("1. Activar")
+                print("2. Pausar")
+                print("3. Reiniciar")
+                accion = input("Seleccione estado: ")
+                
+                if accion == "1" or accion == "2" or accion == "3":
+                    self.ControladorContenedores.cambiar_estado_contenedor(id_vm, id_cont, accion)
+                else:
+                    print("Opción no válida.")
             elif opcion=="4":
                 print("Eliminando Contenedor de una VM...")
                 id_vm = input("ID de la VM: ")
                 id_cont = input("ID del Contenedor a eliminar: ")
-                self.controladorContenedores.eliminar_contenedor(id_vm, id_cont)
+                self.ControladorContenedores.eliminar_contenedor(id_vm, id_cont)
             elif opcion=="5":
                 print("Volviendo al Menú Principal...")
                 break

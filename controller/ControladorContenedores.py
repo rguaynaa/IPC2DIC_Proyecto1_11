@@ -70,3 +70,36 @@ class ControladorContenedores:
                 print("Contenedor REINICIADO y Activo.")
         else:
             print(f"Error: El contenedor {id_cont} no existe en la VM {id_vm}.")
+
+    def cambiar_estado_contenedor(self, id_vm, id_cont, nueva_accion):
+        vm = self.controlador_vms.buscar_vm_id(id_vm)
+        if not vm:
+            print(f"Error: La VM {id_vm} no existe.")
+            return
+
+        # Buscar el objeto contenedor (la búsqueda en lista ya retorna el objeto)
+        contenedor = vm.contenedores.buscar_dato_por_id(id_cont, 'id')
+        
+        if contenedor:
+            print(f"Estado actual: {contenedor.estado}")
+            
+            if nueva_accion == "1": # Activar
+                if contenedor.estado == "Activo":
+                    print("El contenedor ya está Activo.")
+                else:
+                    contenedor.estado = "Activo"
+                    print("Contenedor ACTIVADO.")
+            
+            elif nueva_accion == "2": # Pausar
+                if contenedor.estado == "Pausado":
+                    print("El contenedor ya está Pausado.")
+                else:
+                    contenedor.estado = "Pausado"
+                    print("Contenedor PAUSADO.")
+            
+            elif nueva_accion == "3": # Reiniciar
+                print("Reiniciando contenedor...")
+                contenedor.estado = "Activo"
+                print("Contenedor REINICIADO y Activo.")
+        else:
+            print(f"Error: El contenedor {id_cont} no existe en la VM {id_vm}.")
