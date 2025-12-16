@@ -1,10 +1,10 @@
 from estructuras.ListaSimpleEnlazada import ListaSimpleEnlazada
 
 class MaquinaVirtual:
-    def __init__(self,id, id_centro, so, cpu_nucleos, ram_GB, almacenamiento_GB,ip):
+    def __init__(self,id, id_centro, imagen, cpu_nucleos, ram_GB, almacenamiento_GB,ip):
         self.id = id
         self.id_centro = id_centro
-        self.so = so
+        self.imagen =imagen
         self.cpu_nucleos = cpu_nucleos
         self.ram_GB = ram_GB
         self.almacenamiento_GB = almacenamiento_GB
@@ -14,7 +14,7 @@ class MaquinaVirtual:
     
 
     def mostrar_datos(self):
-        print("VM: ",self.id," - ",self.so,"(", "CPU: ",self.cpu_nucleos,"RAM: ",self.ram_GB,")")
+        print("VM: ",self.id," - ",self.imagen,"(", "CPU: ",self.cpu_nucleos,"RAM: ",self.ram_GB,")")
         print("Estado: ",self.estado)
         print("IP: ",self.ip)
         print("Centro Asignado: ",self.id_centro) 
