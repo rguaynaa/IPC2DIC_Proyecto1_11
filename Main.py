@@ -239,7 +239,7 @@ class Funciones:
                 self.controladorSolicitudes.procesar_solicitud(self.controladorCentro)
             elif opcion=="3":
                 print("Procesando las Solicitudes...")
-                cantidad = input("Cantidad que desea ejecutar: ")
+                cantidad = int(input("Cantidad que desea ejecutar: "))
                 self.controladorSolicitudes.procesar_varias_solicitudes(self.controladorCentro,cantidad)
             elif opcion=="4":
                 print("Viendo Cola de Solicitudes...")
